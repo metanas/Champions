@@ -12,8 +12,12 @@ class Addwin : public QDialog
     Q_OBJECT
 
 public:
-    explicit Addwin(QWidget *parent = 0);
+    explicit Addwin(QWidget *parent = 0, QString str="");
     ~Addwin();
+    QString strMain;
+private slots:
+
+    void on_Equipe_clicked();
 
 private:
     Ui::Addwin *ui;

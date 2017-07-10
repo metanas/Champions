@@ -16,10 +16,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    addwin.cpp
+    addwin.cpp \
+    addequipe.cpp
 
 HEADERS  += mainwindow.h \
-    addwin.h
+    addwin.h \
+    addequipe.h
 
 FORMS    += mainwindow.ui \
-    addwin.ui
+    addwin.ui \
+    addequipe.ui
