@@ -1,6 +1,7 @@
 #include "addwin.h"
 #include "ui_addwin.h"
 #include "mainwindow.h"
+#include "addplayer.h"
 #include "addequipe.h"
 
 Addwin::Addwin(QWidget *parent,QString str) :
@@ -34,4 +35,12 @@ void Addwin::on_Equipe_clicked()
     if (strMain == "A"){
         AddEquipe *equipe = new AddEquipe(this);
         equipe->show();}
+}
+
+void Addwin::on_pushButton_2_clicked()
+{
+    hide();
+    if (strMain == "A"){
+        AddPlayer *player = new AddPlayer(this);
+        player->show();}
 }

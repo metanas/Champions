@@ -17,12 +17,18 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     addwin.cpp \
-    addequipe.cpp
+    addequipe.cpp \
+    addplayer.cpp
 
 HEADERS  += mainwindow.h \
     addwin.h \
-    addequipe.h
+    addequipe.h \
+    addplayer.h
 
 FORMS    += mainwindow.ui \
     addwin.ui \
-    addequipe.ui
+    addequipe.ui \
+    addplayer.ui
+
+DISTFILES += \
+    ../../Downloads/qqqq.jpg
