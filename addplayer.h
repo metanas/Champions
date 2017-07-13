@@ -1,6 +1,6 @@
 #ifndef ADDPLAYER_H
 #define ADDPLAYER_H
-
+#include <QtSql/QSqlDatabase>
 #include <QDialog>
 
 namespace Ui {
@@ -11,8 +11,9 @@ class AddPlayer : public QDialog
 {
     Q_OBJECT
     QString Equipe;
+    QSqlDatabase db;
 public:
-    explicit AddPlayer(QWidget *parent = 0, QString="");
+    explicit AddPlayer(QWidget *parent = 0,QString="");
     ~AddPlayer();
     void AddImage(QString file);
 

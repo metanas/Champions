@@ -18,17 +18,29 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     addwin.cpp \
     addequipe.cpp \
-    addplayer.cpp
+    addplayer.cpp \
+    modequipe.cpp \
+    loginwind.cpp \
+    affplayer.cpp \
+    affequipe.cpp
 
 HEADERS  += mainwindow.h \
     addwin.h \
     addequipe.h \
-    addplayer.h
+    addplayer.h \
+    modequipe.h \
+    loginwind.h \
+    affplayer.h \
+    affequipe.h
 
 FORMS    += mainwindow.ui \
     addwin.ui \
     addequipe.ui \
-    addplayer.ui
+    addplayer.ui \
+    modequipe.ui \
+    loginwind.ui \
+    affplayer.ui \
+    affequipe.ui
 
 DISTFILES += \
     ../../Downloads/qqqq.jpg

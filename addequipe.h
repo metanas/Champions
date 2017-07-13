@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "QPixmap"
+#include <QtSql/QSqlDatabase>
 
 namespace Ui {
 class AddEquipe;

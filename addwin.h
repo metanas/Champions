@@ -2,6 +2,7 @@
 #define ADDWIN_H
 
 #include <QDialog>
+#include <QtSql/QSqlDatabase>
 
 namespace Ui {
 class Addwin;
@@ -10,7 +11,6 @@ class Addwin;
 class Addwin : public QDialog
 {
     Q_OBJECT
-
 public:
     explicit Addwin(QWidget *parent = 0, QString str="");
     ~Addwin();

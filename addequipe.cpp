@@ -5,6 +5,10 @@
 #include "QMessageBox"
 #include "mainwindow.h"
 #include "addplayer.h"
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
+
+extern QSqlDatabase db;
 AddEquipe::AddEquipe(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AddEquipe)
@@ -53,13 +57,19 @@ void AddEquipe::on_AddButton_clicked()
          ui->Ligue->setFocus();
     else{
         hide();
+        QSqlQuery req;
+        req.prepare("INSERT INTO Equipe VALUES (:Nom, :stade, :Entrainneur, :Ligue)");
+        req.bindValue(":Nom", ui->EquipeEqit->text());
+        req.bindValue(":stade", ui->stade->text());
+        req.bindValue(":Entrainneur", ui->entrainneur->text());
+        req.bindValue(":Ligue", ui->Ligue->text());
+        req.exec();
         AddPlayer *player = new AddPlayer(this,ui->EquipeEqit->text());
-        player->show();}
+        player->show();
+    }
 }
 
 void AddEquipe::on_Quit_clicked()
 {
    hide();
-   MainWindow *main = new MainWindow(this);
-   main->show();
 }

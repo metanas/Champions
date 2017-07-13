@@ -3,7 +3,11 @@
 #include "mainwindow.h"
 #include "addplayer.h"
 #include "addequipe.h"
-
+#include <QtSql/QSqlDatabase>
+#include "modequipe.h"
+#include "affplayer.h"
+#include "affequipe.h"
+extern QSqlDatabase db;
 Addwin::Addwin(QWidget *parent,QString str) :
     QDialog(parent),
     ui(new Ui::Addwin)
@@ -21,6 +25,7 @@ Addwin::Addwin(QWidget *parent,QString str) :
         Set = "Que voulez-vous chercher" ;
     ui->label->setText(Set);
     ui->label->setAlignment(Qt::AlignHCenter);
+
 }
 
 Addwin::~Addwin()
@@ -34,7 +39,12 @@ void Addwin::on_Equipe_clicked()
     hide();
     if (strMain == "A"){
         AddEquipe *equipe = new AddEquipe(this);
-        equipe->show();}
+        equipe->show();
+    }
+    else if (strMain == "F" ){
+        affEquipe *equipe = new affEquipe(this);
+        equipe->show();
+    }
 }
 
 void Addwin::on_pushButton_2_clicked()
@@ -42,5 +52,9 @@ void Addwin::on_pushButton_2_clicked()
     hide();
     if (strMain == "A"){
         AddPlayer *player = new AddPlayer(this);
-        player->show();}
+        player->show();
+    } else if (strMain == "F"){
+        affPlayer *player = new affPlayer(this);
+        player->show();
+    }
 }
