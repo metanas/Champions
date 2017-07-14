@@ -17,7 +17,7 @@ loginwind::loginwind(QWidget *parent) :
 
 loginwind::~loginwind()
 {
-    delete ui;
+    hide();
 }
 
 void loginwind::on_pushButton_clicked()

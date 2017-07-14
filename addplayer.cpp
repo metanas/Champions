@@ -14,12 +14,18 @@ AddPlayer::AddPlayer(QWidget *parent, QString equipe) :
     Equipe = equipe;
     QString t = "/home/t530/Downloads/Scream.jpg";
     AddImage(t);
-    ui->Equipe->setText(Equipe);
+    QSqlQuery *query = new QSqlQuery("select Nom from Equipe");
+            while(query->next())
+            {
+                ui->comboBox->addItem(query->value(0).toString());
+            }
+    int index = ui->comboBox->findText(Equipe);
+    ui->comboBox->setCurrentIndex(index);
 }
 
 AddPlayer::~AddPlayer()
 {
-    delete ui;
+    hide();
 }
 
 
@@ -36,13 +42,11 @@ void AddPlayer::AddImage(QString file){
 
 void AddPlayer::on_pushButton_clicked()
 {
-      QString a =  ui->Equipe->text();
+      QString a =  ui->comboBox->currentText();
       QString b = ui->Nom->text();
       QString c = ui->Prenom->text();
 
-    if(ui->Equipe->text().isEmpty())
-        ui->Equipe->setFocus();
-    else if (ui->Nom->text().isEmpty())
+    if (ui->Nom->text().isEmpty())
         ui->Nom->setFocus();
     else if (ui->Prenom->text().isEmpty())
         ui->Prenom->setFocus();
@@ -67,6 +71,7 @@ void AddPlayer::on_pushButton_clicked()
     ui->dateEdit->setDate(date);
     ui->Nast->setText("");
     ui->Nom->setText("");
+    ui->Num->setValue(1);
     ui->Prenom->setText("");
     }
 }

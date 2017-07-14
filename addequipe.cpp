@@ -7,6 +7,7 @@
 #include "addplayer.h"
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
+#include <QDebug>
 
 extern QSqlDatabase db;
 AddEquipe::AddEquipe(QWidget *parent) :
@@ -16,12 +17,17 @@ AddEquipe::AddEquipe(QWidget *parent) :
     ui->setupUi(this);
     QString t = "/home/t530/Downloads/qqqq.jpg";
     AddImage(t);
+    QSqlQuery *query = new QSqlQuery("select Nom from Stade");
+            while(query->next())
+            {
+                ui->comboBox->addItem(query->value(0).toString());
+            }
 
 }
 
 AddEquipe::~AddEquipe()
 {
-    delete ui;
+    hide();
 }
 
 void AddEquipe::on_toolButton_clicked()
@@ -49,8 +55,6 @@ void AddEquipe::on_AddButton_clicked()
         QMessageBox::critical(this, "Not Found","Choisie une photo pour l'equipe");
     else if (ui->EquipeEqit->text().isEmpty())
         ui->EquipeEqit->setFocus();
-    else if (ui->stade->text().isEmpty())
-         ui->stade->setFocus();
     else if (ui->entrainneur->text().isEmpty())
          ui->entrainneur->setFocus();
     else if (ui->Ligue->text().isEmpty())
@@ -60,7 +64,7 @@ void AddEquipe::on_AddButton_clicked()
         QSqlQuery req;
         req.prepare("INSERT INTO Equipe VALUES (:Nom, :stade, :Entrainneur, :Ligue)");
         req.bindValue(":Nom", ui->EquipeEqit->text());
-        req.bindValue(":stade", ui->stade->text());
+        req.bindValue(":stade", ui->comboBox->currentText());
         req.bindValue(":Entrainneur", ui->entrainneur->text());
         req.bindValue(":Ligue", ui->Ligue->text());
         req.exec();

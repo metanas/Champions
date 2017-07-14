@@ -4,6 +4,8 @@
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlQueryModel>
 #include <QDebug>
+#include <QModelIndex>
+
 extern QSqlDatabase db;
 ModEquipe::ModEquipe(QWidget *parent) :
     QDialog(parent),
@@ -14,53 +16,61 @@ ModEquipe::ModEquipe(QWidget *parent) :
 
 ModEquipe::~ModEquipe()
 {
-      delete ui;
+      hide();
 }
 
-void ModEquipe::on_lineEdit_2_cursorPositionChanged(int arg1, int arg2)
+
+void ModEquipe::on_pushButton_clicked()
 {
-    QSqlQueryModel *modal = new QSqlQueryModel();
-    QSqlQuery req;
-    req.prepare("SELECT * FROM Equipe where Nom like :c");
-    QString a = ui->lineEdit_2->text() + "%";
-    req.bindValue(":c",a);
-    req.exec();
-    modal->setQuery(req);
-    ui->tableView->setModel(modal);
+        QSqlQueryModel *modal = new QSqlQueryModel();
+        QSqlQuery req;
+        if (!ui->lineEdit_2->text().isEmpty())
+            req.prepare("SELECT * FROM Equipe where Nom='" + ui->lineEdit_2->text() +"'");
+        else if (!ui->lineEdit->text().isEmpty())
+            req.prepare("SELECT * FROM Equipe where Stade='" + ui->lineEdit->text() + "'");
+        else if (!ui->lineEdit_3->text().isEmpty())
+            req.prepare("SELECT * FROM Equipe where Entrainneur='" + ui->lineEdit_3->text()+ "'");
+        else if (!ui->lineEdit_4->text().isEmpty())
+            req.prepare("SELECT * FROM Equipe where Ligue='" + ui->lineEdit_4->text() + "'");
+        req.exec();
+        modal->setQuery(req);
+        ui->tableView->setModel(modal);
 }
 
-void ModEquipe::on_lineEdit_cursorPositionChanged(int arg1, int arg2)
+void ModEquipe::on_tableView_clicked(const QModelIndex &index)
 {
-    QSqlQueryModel *modal = new QSqlQueryModel();
-    QSqlQuery req;
-    req.prepare("SELECT * FROM Equipe where Stade like :c");
-    QString a = ui->lineEdit->text() + "%";
-    req.bindValue(":c",a);
-    req.exec();
-    modal->setQuery(req);
-    ui->tableView->setModel(modal);
+        QSqlQuery req;
+        if (index.column() == 0){
+            req.prepare("Select * from Equipe where Nom='" + index.data().toString() + "'");
+            req.exec();
+            req.next();
+
+        } else if (index.column() == 1){
+            req.prepare("Select * from Equipe where Stade='" + index.data().toString() + "'");
+            req.exec();
+            req.next();
+
+        }
+        else if (index.column() == 2){
+            req.prepare("Select * from Equipe where Entrainneur='" + index.data().toString() + "'");
+            req.exec();
+            req.next();
+        }
+        ui->lineEdit_2->setText(req.value(0).toString());
+        ui->lineEdit->setText(req.value(1).toString());
+        ui->lineEdit_3->setText(req.value(2).toString());
+        ui->lineEdit_4->setText(req.value(3).toString());
+        equipe = ui->lineEdit->text();
 }
 
-void ModEquipe::on_lineEdit_3_cursorPositionChanged(int arg1, int arg2)
+void ModEquipe::on_pushButton_2_clicked()
 {
-    QSqlQueryModel *modal = new QSqlQueryModel();
     QSqlQuery req;
-    req.prepare("SELECT * FROM Equipe where Entrainneur like :c");
-    QString a = ui->lineEdit_3->text() + "%";
-    req.bindValue(":c",a);
+    req.prepare("Update Equipe set Nom='" + ui->lineEdit_2->text() + "', stade='" + ui->lineEdit->text() + "', Entrainneur='" + ui->lineEdit_3->text() + "', liga='" + ui->lineEdit_4->text() + "' where Nom='" + equipe + "'" );
     req.exec();
-    modal->setQuery(req);
-    ui->tableView->setModel(modal);
 }
 
-void ModEquipe::on_lineEdit_4_cursorPositionChanged(int arg1, int arg2)
+void ModEquipe::on_pushButton_3_clicked()
 {
-    QSqlQueryModel *modal = new QSqlQueryModel();
-    QSqlQuery req;
-    req.prepare("SELECT * FROM Equipe where Ligue like :c");
-    QString a = ui->lineEdit_4->text() + "%";
-    req.bindValue(":c", a);
-    req.exec();
-    modal->setQuery(req);
-    ui->tableView->setModel(modal);
+    hide();
 }

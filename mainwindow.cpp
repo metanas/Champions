@@ -15,6 +15,8 @@ MainWindow::MainWindow(QWidget *parent,QString usr) :
 {
     ui->setupUi(this);
     QString str;
+    QString t = "/home/t530/Desktop/home.jpeg";
+    AddImage(t);
     user = usr;
     if (user == ""){
         ui->AddButton->setEnabled(false);
@@ -81,4 +83,14 @@ void MainWindow::on_pushButton_2_clicked()
     hide();
     MainWindow *main = new MainWindow(this);
     main->show();
+}
+
+void MainWindow::AddImage(QString file){
+    if (!file.isNull()){
+        QPixmap imageLabel(file);
+        int w = ui->Image->width();
+        int h = ui->Image->height();
+        ui->Image->setPixmap(imageLabel.scaled(w,h,Qt::KeepAspectRatio));
+    }
+
 }

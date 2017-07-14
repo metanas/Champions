@@ -22,7 +22,10 @@ SOURCES += main.cpp\
     modequipe.cpp \
     loginwind.cpp \
     affplayer.cpp \
-    affequipe.cpp
+    affequipe.cpp \
+    modplayer.cpp \
+    suppequipe.cpp \
+    suppplayer.cpp
 
 HEADERS  += mainwindow.h \
     addwin.h \
@@ -31,7 +34,10 @@ HEADERS  += mainwindow.h \
     modequipe.h \
     loginwind.h \
     affplayer.h \
-    affequipe.h
+    affequipe.h \
+    modplayer.h \
+    suppequipe.h \
+    suppplayer.h
 
 FORMS    += mainwindow.ui \
     addwin.ui \
@@ -40,7 +46,10 @@ FORMS    += mainwindow.ui \
     modequipe.ui \
     loginwind.ui \
     affplayer.ui \
-    affequipe.ui
+    affequipe.ui \
+    modplayer.ui \
+    suppequipe.ui \
+    suppplayer.ui
 
 DISTFILES += \
     ../../Downloads/qqqq.jpg

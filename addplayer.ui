@@ -131,7 +131,7 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QLineEdit" name="Equipe"/>
+       <widget class="QComboBox" name="comboBox"/>
       </item>
       <item>
        <widget class="QLineEdit" name="Nom"/>
