@@ -18,7 +18,7 @@ affPlayer::affPlayer(QWidget *parent) :
 
 affPlayer::~affPlayer()
 {
-    delete ui;
+    hide();
 }
 
 void affPlayer::on_Equipe_cursorPositionChanged(int arg1, int arg2)

@@ -16,7 +16,7 @@ affEquipe::affEquipe(QWidget *parent) :
 
 affEquipe::~affEquipe()
 {
-    delete ui;
+    hide();
 }
 
 void affEquipe::on_lineEdit_2_cursorPositionChanged(int arg1, int arg2)

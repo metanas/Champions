@@ -7,6 +7,10 @@
 #include "modequipe.h"
 #include "affplayer.h"
 #include "affequipe.h"
+#include "modplayer.h"
+#include "suppequipe.h"
+#include "suppplayer.h"
+
 extern QSqlDatabase db;
 Addwin::Addwin(QWidget *parent,QString str) :
     QDialog(parent),
@@ -31,18 +35,25 @@ Addwin::Addwin(QWidget *parent,QString str) :
 Addwin::~Addwin()
 {
 
-    delete ui;
+    hide();
 }
 
 void Addwin::on_Equipe_clicked()
 {
     hide();
+
     if (strMain == "A"){
         AddEquipe *equipe = new AddEquipe(this);
         equipe->show();
     }
     else if (strMain == "F" ){
         affEquipe *equipe = new affEquipe(this);
+        equipe->show();
+    } else if (strMain == "M" ){
+        ModEquipe *equipe = new ModEquipe(this);
+        equipe->show();
+    }else{
+        suppEquipe *equipe = new suppEquipe(this);
         equipe->show();
     }
 }
@@ -55,6 +66,12 @@ void Addwin::on_pushButton_2_clicked()
         player->show();
     } else if (strMain == "F"){
         affPlayer *player = new affPlayer(this);
+        player->show();
+    } else if (strMain == "M"){
+        modplayer *player = new modplayer(this);
+        player->show();
+    }else{
+        SuppPlayer *player = new SuppPlayer(this);
         player->show();
     }
 }
